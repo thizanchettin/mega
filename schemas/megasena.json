@@ -1,0 +1,97 @@
+{
+  "type": "struct",
+  "fields": [
+    { "name": "acumulado", "type": "boolean", "nullable": true },
+    { "name": "dataApuracao", "type": "string", "nullable": true },
+    { "name": "dataProximoConcurso", "type": "string", "nullable": true },
+
+    {
+      "name": "dezenasSorteadasOrdemSorteio",
+      "type": {
+        "type": "array",
+        "elementType": "string",
+        "containsNull": true
+      },
+      "nullable": true
+    },
+
+    { "name": "exibirDetalhamentoPorCidade", "type": "boolean", "nullable": true },
+    { "name": "id", "type": "string", "nullable": true },
+    { "name": "indicadorConcursoEspecial", "type": "long", "nullable": true },
+
+    {
+      "name": "listaDezenas",
+      "type": {
+        "type": "array",
+        "elementType": "string",
+        "containsNull": true
+      },
+      "nullable": true
+    },
+
+    { "name": "listaDezenasSegundoSorteio", "type": "string", "nullable": true },
+
+    {
+      "name": "listaMunicipioUFGanhadores",
+      "type": {
+        "type": "array",
+        "containsNull": true,
+        "elementType": {
+          "type": "struct",
+          "fields": [
+            { "name": "ganhadores", "type": "long", "nullable": true },
+            { "name": "municipio", "type": "string", "nullable": true },
+            { "name": "nomeFatansiaUL", "type": "string", "nullable": true },
+            { "name": "posicao", "type": "long", "nullable": true },
+            { "name": "serie", "type": "string", "nullable": true },
+            { "name": "uf", "type": "string", "nullable": true }
+          ]
+        }
+      },
+      "nullable": true
+    },
+
+    {
+      "name": "listaRateioPremio",
+      "type": {
+        "type": "array",
+        "containsNull": true,
+        "elementType": {
+          "type": "struct",
+          "fields": [
+            { "name": "descricaoFaixa", "type": "string", "nullable": true },
+            { "name": "faixa", "type": "long", "nullable": true },
+            { "name": "numeroDeGanhadores", "type": "long", "nullable": true },
+            { "name": "valorPremio", "type": "double", "nullable": true }
+          ]
+        }
+      },
+      "nullable": true
+    },
+
+    { "name": "listaResultadoEquipeEsportiva", "type": "string", "nullable": true },
+    { "name": "localSorteio", "type": "string", "nullable": true },
+    { "name": "nomeMunicipioUFSorteio", "type": "string", "nullable": true },
+    { "name": "nomeTimeCoracaoMesSorte", "type": "string", "nullable": true },
+
+    { "name": "numero", "type": "long", "nullable": true },
+    { "name": "numeroConcursoAnterior", "type": "long", "nullable": true },
+    { "name": "numeroConcursoFinal_0_5", "type": "long", "nullable": true },
+    { "name": "numeroConcursoProximo", "type": "long", "nullable": true },
+    { "name": "numeroJogo", "type": "long", "nullable": true },
+
+    { "name": "observacao", "type": "string", "nullable": true },
+    { "name": "premiacaoContingencia", "type": "string", "nullable": true },
+    { "name": "tipoJogo", "type": "string", "nullable": true },
+    { "name": "tipoPublicacao", "type": "long", "nullable": true },
+    { "name": "ultimoConcurso", "type": "boolean", "nullable": true },
+
+    { "name": "valorAcumuladoConcursoEspecial", "type": "double", "nullable": true },
+    { "name": "valorAcumuladoConcurso_0_5", "type": "double", "nullable": true },
+    { "name": "valorAcumuladoProximoConcurso", "type": "double", "nullable": true },
+    { "name": "valorArrecadado", "type": "double", "nullable": true },
+    { "name": "valorEstimadoProximoConcurso", "type": "double", "nullable": true },
+    { "name": "valorSaldoReservaGarantidora", "type": "double", "nullable": true },
+    { "name": "valorTotalPremioFaixaUm", "type": "double", "nullable": true }
+  ]
+}
