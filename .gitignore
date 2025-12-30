@@ -143,6 +143,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.databrickscfg
 
 # Spyder project settings
 .spyderproject
