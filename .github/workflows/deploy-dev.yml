@@ -2,12 +2,7 @@ name: Deploy DEV (manual)
 
 on:
   workflow_dispatch:
-    inputs:
-      ref:
-        description: "Branch para deploy em DEV (não pode ser main)"
-        required: true
-        default: "feature/minha-branch"
-
+    
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest
@@ -15,15 +10,14 @@ jobs:
     steps:
       - name: Block main
         run: |
-          if [ "${{ inputs.ref }}" = "main" ]; then
+          if [ "${{ github.ref_name }}" = "main" ]; then
             echo "Deploy DEV não pode usar a branch main."
             exit 1
           fi
 
-      - name: Checkout selected ref
+      - name: Checkout selected branch
         uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.ref }}
+
 
       - name: Setup Python
         uses: actions/setup-python@v5
