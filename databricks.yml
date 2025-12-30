@@ -1,0 +1,58 @@
+bundle:
+  name: mega-job
+
+variables:
+  schema_path:
+    default: ""
+  source_path:
+    default: ""
+
+artifacts:
+  default:
+    type: whl
+    path: .
+    build: |-
+      python -m pip install --upgrade pip build
+      python -m build
+
+
+targets:
+  dev:
+    mode: development
+    default: true
+    variables:
+      schema_path: "${workspace.file_path}/package/mega/schemas/megasena.json"
+      source_path: "/Volumes/mega/bronze/resultados/*.json"
+
+  prd:
+    mode: production
+    variables:
+      schema_path: "${workspace.file_path}/package/mega/schemas/megasena.json"
+      source_path: "/Volumes/mega/bronze/resultados/*.json"
+
+
+resources:
+  jobs:
+    mega_job:
+      name: mega-job-${bundle.target}
+      tasks:
+        - task_key: run
+          python_wheel_task:
+            package_name: mega
+            entry_point: main
+            parameters:
+            - "--env"
+            - "${bundle.target}"
+            - "--schema-path"
+            - "${var.schema_path}"
+            - "--source-path"
+            - "${var.source_path}"
+          environment_key: default
+
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "2"
+            dependencies:
+              - ./dist/*.whl
+
