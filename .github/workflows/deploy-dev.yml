@@ -1,0 +1,43 @@
+name: Deploy DEV (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch para deploy em DEV (não pode ser main)"
+        required: true
+        default: "feature/minha-branch"
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Block main
+        run: |
+          if [ "${{ inputs.ref }}" = "main" ]; then
+            echo "Deploy DEV não pode usar a branch main."
+            exit 1
+          fi
+
+      - name: Checkout selected ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Validate + Deploy bundle (dev)
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+        run: |
+          databricks bundle validate -t dev
+          databricks bundle deploy -t dev

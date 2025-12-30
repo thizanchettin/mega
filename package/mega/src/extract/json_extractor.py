@@ -1,7 +1,7 @@
 import logging
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.functions import col
-from src.utils.schema_loader import load_schema
+from mega.src.utils.schema_loader import load_schema
 
 logger = logging.getLogger(__name__)
 
