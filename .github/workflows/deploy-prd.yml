@@ -1,9 +1,8 @@
-name: Deploy PRD (merge to main)
+name: Deploy PRD (push to main)
 
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
-    types: [ "closed" ]
 
 jobs:
   deploy-prd:
